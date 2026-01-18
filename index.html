@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Solutions | Premium Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 0 6rem;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(139, 92, 246, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+        }
+
+        /* Services */
+        .services {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--dark-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .service-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .service-description {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .old-price {
+            font-size: 1.1rem;
+            color: #64748b;
+            text-decoration: line-through;
+        }
+
+        .new-price {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .discount {
+            background: var(--success);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .service-button {
+            display: block;
+            width: 100%;
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid rgba(14, 165, 233, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .service-button:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Telegram Button */
+        .telegram-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0088cc, #00aced);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+            transition: var(--transition);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .telegram-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-light);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 136, 204, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 136, 204, 0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            nav a {
+                margin: 0;
+            }
+
+            .hero {
+                padding: 8rem 0 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .telegram-button {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>DigitalSolutions</span>
+            </div>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Premium Digital Solutions</h1>
+            <p>High-quality services with special limited-time offers. Get professional solutions at unbeatable prices.</p>
+            <a href="#services" class="cta-button">View All Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Premium Services</h2>
+                <p>Special limited-time offers with significant discounts</p>
+            </div>
+            
+            <div class="services-grid" id="servicesContainer">
+                <!-- Services will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Telegram Button -->
+    <a href="https://t.me/support_service" class="telegram-button" target="_blank" title="Contact Customer Support">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DigitalSolutions</h3>
+                    <p style="color: #94a3b8; margin-top: 1rem;">Professional digital services with guaranteed results and 24/7 customer support.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/support_service" target="_blank"><i class="fab fa-telegram"></i> Telegram Support</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contact@digitalsolutions.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services"><i class="fas fa-arrow-right"></i> All Services</a></li>
+                        <li><a href="#services"><i class="fas fa-arrow-right"></i> Special Offers</a></li>
+                        <li><a href="#services"><i class="fas fa-arrow-right"></i> New Arrivals</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 DigitalSolutions. All rights reserved. | Premium Digital Services Provider</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Services data with images
+        const services = [
+            {
+                id: 1,
+                title: "Trading Platform",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Professional trading platform with advanced features for cryptocurrency, stocks, and forex trading. Real-time data and secure transactions.",
+                oldPrice: "$299",
+                newPrice: "$199",
+                discount: "33% OFF"
+            },
+            {
+                id: 2,
+                title: "Optimisation Services",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Complete optimization solutions for maximum performance. Speed optimization and efficiency improvements.",
+                oldPrice: "$249",
+                newPrice: "$179",
+                discount: "28% OFF"
+            },
+            {
+                id: 3,
+                title: "E-commerce Solution",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Full e-commerce platform with payment integration, inventory management, and customer dashboard.",
+                oldPrice: "$499",
+                newPrice: "$349",
+                discount: "30% OFF"
+            },
+            {
+                id: 4,
+                title: "Video Call System",
+                image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "HD video call solution with screen sharing, recording, and multi-user support capabilities.",
+                oldPrice: "$179",
+                newPrice: "$129",
+                discount: "28% OFF"
+            },
+            {
+                id: 5,
+                title: "Advertising Campaign",
+                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Targeted advertising campaigns across social media and search engines for maximum reach.",
+                oldPrice: "$399",
+                newPrice: "$299",
+                discount: "25% OFF"
+            },
+            {
+                id: 6,
+                title: "WhatsApp Numbers",
+                image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+                description: "Software for generating and managing WhatsApp numbers for business communication.",
+                oldPrice: "$159",
+                newPrice: "$119",
+                discount: "25% OFF"
+            },
+            {
+                id: 7,
+                title: "Receipt Editing",
+                image: "https://images.unsplash.com/photo-1586282391129-76a6df230234?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Professional software for editing and customizing digital receipts and invoices.",
+                oldPrice: "$129",
+                newPrice: "$89",
+                discount: "31% OFF"
+            }
+        ];
+
+        // Load services
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('servicesContainer');
+            
+            services.forEach((service, index) => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.innerHTML = `
+                    <div class="service-image">
+                        <img src="${service.image}" alt="${service.title}">
+                        <div class="service-badge">${service.discount}</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>${service.title}</h3>
+                        <p class="service-description">${service.description}</p>
+                        
+                        <div class="price-container">
+                            <span class="old-price">${service.oldPrice}</span>
+                            <span class="new-price">${service.newPrice}</span>
+                            <span class="discount">SAVE ${service.discount}</span>
+                        </div>
+                        
+                        <a href="https://t.me/support_service" target="_blank" class="service-button">
+                            <i class="fab fa-telegram"></i> Contact for Details
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Animate cards on scroll
+            const animateCards = () => {
+                const cards = document.querySelectorAll('.service-card');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        card.classList.add('animated');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateCards);
+            animateCards();
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
