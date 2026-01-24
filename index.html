@@ -128,6 +128,68 @@
             color: var(--accent);
         }
 
+        /* Channel Link */
+        .channel-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent), #0088cc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-left: 1rem;
+        }
+
+        .channel-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* View Counter */
+        .view-counter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--red);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .like-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 6px 12px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .like-counter:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .like-counter.liked {
+            color: var(--red);
+            background: rgba(255, 51, 102, 0.1);
+            border-color: var(--red);
+        }
+
         /* Hero */
         .hero {
             padding: 12rem 0 6rem;
@@ -312,7 +374,7 @@
 
         .price-container {
             background: rgba(0, 0, 0, 0.5);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 15px;
             margin: 1.5rem 0;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -322,17 +384,17 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .old-price {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #666;
             text-decoration: line-through;
         }
 
         .new-price {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--accent), var(--green));
             -webkit-background-clip: text;
@@ -342,19 +404,31 @@
         .discount {
             background: linear-gradient(135deg, var(--red), #ff3366);
             color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
             font-weight: 700;
         }
 
-        .guarantee {
+        .view-stats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .views-count {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--green);
+            color: #aaa;
             font-size: 0.9rem;
-            margin-top: 10px;
+        }
+
+        .views-count i {
+            color: var(--accent);
         }
 
         .service-button {
@@ -603,6 +677,52 @@
             }
         }
 
+        @keyframes pulseRed {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 51, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 51, 102, 0);
+            }
+        }
+
+        /* Global View Counter */
+        .global-view-counter {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: var(--shadow);
+        }
+
+        .global-views {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .global-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -617,12 +737,18 @@
 
             nav {
                 display: flex;
-                gap: 1.5rem;
+                gap: 1rem;
                 margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             nav a {
                 margin: 0;
+            }
+
+            .channel-link {
+                margin: 0.5rem 0;
             }
 
             .hero {
@@ -651,11 +777,30 @@
             .telegram-label {
                 display: none;
             }
+
+            .global-view-counter {
+                position: static;
+                margin: 2rem auto;
+                max-width: 300px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Global View Counter -->
+    <div class="global-view-counter">
+        <div class="global-views" id="globalViews">0</div>
+        <div class="global-label">
+            <span class="live-dot"></span>
+            <span>LIVE VIEWERS</span>
+        </div>
+        <div class="like-counter" id="globalLikeBtn" style="margin-top: 10px;">
+            <i class="far fa-heart"></i>
+            <span id="globalLikes">0</span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container header-content">
@@ -670,15 +815,16 @@
                 <div class="trust-badge">
                     <i class="fas fa-check-circle"></i>
                     <span>Trusted by 500+ Clients</span>
-
                 </div>
                 <div class="trust-badge">
                     <i class="fas fa-clock"></i>
                     <span>24/16 Support</span>
                 </div>
-
+                <div class="view-counter">
+                    <span class="live-dot"></span>
+                    <span id="headerViews">0</span> viewing now
+                </div>
             </div>
-
 
         </div>
     </header>
@@ -704,8 +850,8 @@
                     <div class="stat-label">Support Available</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">30-Day</div>
-                    <div class="stat-label">Money Back Guarantee</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Active Services</div>
                 </div>
             </div>
 
@@ -721,7 +867,7 @@
             <div class="section-title">
                 <h2>Premium Services</h2>
                 <p style="color: #888; max-width: 600px; margin: 1rem auto;">Limited time offers with exclusive
-                    discounts</p>
+                    discounts - <span id="totalViews">0</span> views this week</p>
             </div>
 
             <div class="services-grid" id="servicesContainer">
@@ -763,10 +909,10 @@
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Money Back</h3>
-                    <p style="color: #aaa;">30-day money back guarantee on all services</p>
+                    <h3>Fast Delivery</h3>
+                    <p style="color: #aaa;">Quick turnaround times for all services</p>
                 </div>
             </div>
         </div>
@@ -784,39 +930,39 @@
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "The trading platform service exceeded my expectations. Professional and reliable!"
+                        "The Delivery Platform service transformed my logistics business. Professional and reliable!"
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">MJ</div>
                         <div>
                             <div style="font-weight: 600;">Michael Jordan</div>
-                            <div style="color: #888; font-size: 0.9rem;">Business Owner</div>
+                            <div style="color: #888; font-size: 0.9rem;">Logistics Owner</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "Excellent WhatsApp numbers service. Fast delivery and great support team!"
+                        "Excellent Payment Platform integration. Fast delivery and great support team!"
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">SR</div>
                         <div>
                             <div style="font-weight: 600;">Sarah Roberts</div>
-                            <div style="color: #888; font-size: 0.9rem;">Marketing Agency</div>
+                            <div style="color: #888; font-size: 0.9rem;">E-commerce Business</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "The receipt editing software saved me hours of work. Highly recommended!"
+                        "The Gaming Platform exceeded my expectations. Highly recommended for game developers!"
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">DT</div>
                         <div>
                             <div style="font-weight: 600;">David Thompson</div>
-                            <div style="color: #888; font-size: 0.9rem;">Freelancer</div>
+                            <div style="color: #888; font-size: 0.9rem;">Game Developer</div>
                         </div>
                     </div>
                 </div>
@@ -845,6 +991,10 @@
                             style="color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 8px;">
                             <i class="fas fa-check-circle"></i> Verified Services
                         </div>
+                        <div class="view-counter">
+                            <span class="live-dot"></span>
+                            <span id="footerViews">0</span> online
+                        </div>
                     </div>
                 </div>
 
@@ -854,16 +1004,16 @@
                         <li><a href="#services"><i class="fas fa-chevron-right"></i> All Services</a></li>
                         <li><a href="#trust"><i class="fas fa-chevron-right"></i> Why Choose Us</a></li>
                         <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="https://t.me/+5P030RRQH0UzNDk0" target="_blank"><i class="fab fa-telegram"></i> Join Channel</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h3>Contact Info</h3>
+                    <h3>Contact Support</h3>
                     <ul class="footer-links">
                         <li><a href="https://t.me/realcapoo" target="_blank"><i class="fab fa-telegram"></i> Telegram:
                                 @realcapoo</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> support@elitedigital.com</a></li>
+                        <li><a href="https://t.me/+5P030RRQH0UzNDk0" target="_blank"><i class="fab fa-telegram"></i> Official Channel</a></li>
                         <li><a href="#"><i class="fas fa-clock"></i> 24/16 Support Available</a></li>
                         <li><a href="#"><i class="fas fa-shield-alt"></i> Secure Transactions</a></li>
                     </ul>
@@ -879,88 +1029,183 @@
 
     <script>
         const services = [
-
-
             {
-                title: "Fake Video Call with AI ",
-                image: "./swap.jpg",
-                description: "We will teach you how to change your face during the call, and we will provide the software free of charge. ",
-                oldPrice: "$200",
-                newPrice: "$100",
-                discount: "50% OFF"
+                title: "Delivery Platform",
+                image: "./delivery.png",
+                description: "Complete delivery management system with real-time tracking, driver management, route optimization, and customer notifications. Perfect for logistics companies.",
+                oldPrice: "$2500",
+                newPrice: "$1500",
+                discount: "40% OFF",
+                views: 687
             },
             {
-                title: "Advertising Campaign",
-                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-                description: "We will teach you all the techniques in advertising to help you steal clients from your competitors. ",
-                oldPrice: "$399",
-                newPrice: "$299",
-                discount: "25% OFF"
+                title: "Payment Platform",
+                image: "./payment.png",
+                description: "Secure payment processing system with multiple gateway integration, fraud detection, and real-time analytics. Supports all major payment methods.",
+                oldPrice: "$1200",
+                newPrice: "$800",
+                discount: "33% OFF",
+                views: 543
+            },
+            {
+                title: "Gaming Platform",
+                image: "./gambling.png",
+                description: "Complete gaming platform with multiplayer support, leaderboards, achievements, and in-app purchases. Perfect for game developers and publishers.",
+                oldPrice: "$2500",
+                newPrice: "$1500",
+                discount: "40% OFF",
+                views: 598
+            },
+            {
+                title: "Fake Video Call with AI",
+                image: "./swap.jpg",
+                description: "Advanced AI-powered video call manipulation software. Change your face in real-time during video calls with our professional tools and software.",
+                oldPrice: "$120",
+                newPrice: "$50",
+                discount: "50% OFF",
+                views: 892
+            },
+            {
+                title: "Advertising",
+                image: "./ads.png",
+                description: "Complete advertising strategy and campaign management. Learn advanced techniques to attract clients from competitors with proven methods.",
+                oldPrice: "$199",
+                newPrice: "$90",
+                discount: "25% OFF",
+                views: 456
             },
             {
                 title: "Data Generators",
-                image: "./cyber.png",
-                description: "Professional software for generating data (WhatsApp numbers, emails) from any country in the world. Also extracts group members from Telegram and WhatsApp.",
+                image: "./data.png",
+                description: "Professional software for generating data (WhatsApp numbers, emails) from any country. Extract group members from Telegram and WhatsApp automatically.",
                 oldPrice: "$829",
                 newPrice: "$400",
-                discount: "52% OFF"
+                discount: "52% OFF",
+                views: 765
             },
             {
                 title: "Trading Platform",
                 image: "./trading.jpg",
-                description: "Professional trading platform with real-time analytics, secure transactions, and comprehensive market insights.",
+                description: "Advanced trading platform with real-time analytics, secure transactions, comprehensive market insights, and automated trading capabilities.",
                 oldPrice: "$2999",
                 newPrice: "$1999",
-                discount: "33% OFF"
+                discount: "33% OFF",
+                views: 512
             },
             {
                 title: "Optimisation Platform",
                 image: "./grap.jpg",
-                description: "We design any kind of optimisation platform or grap order you want.",
+                description: "Custom optimization platforms and graph order systems. We design any kind of optimization platform or graph system you need for your business.",
                 oldPrice: "$2490",
                 newPrice: "$1000",
-                discount: "56% OFF"
+                discount: "56% OFF",
+                views: 423
             },
             {
-                title: "E-commerce Solution",
-                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-                description: "Full e-commerce platform with payment integration, inventory management, and customer dashboard.",
-                oldPrice: "$1600",
-                newPrice: "$1000",
-                discount: "38% OFF"
+                title: "E-commerce Platform",
+                image: "./ecommerce.png",
+                description: "Complete e-commerce platform with payment integration, inventory management, customer dashboard, and advanced analytics.",
+                oldPrice: "$2600",
+                newPrice: "$1600",
+                discount: "38% OFF",
+                views: 634
             },
-
             {
                 title: "Receipt Editing",
                 image: "./print.jpg",
-                description: "Advanced software for editing and customizing digital receipts and invoices with multiple formats. (Crypto, Bank statment , ... ) with option to take a screenshot",
+                description: "Advanced software for editing digital receipts and invoices. Supports multiple formats including crypto and bank statements with screenshot capabilities.",
                 oldPrice: "$300",
                 newPrice: "$200",
-                discount: "33% OFF"
+                discount: "33% OFF",
+                views: 789
             },
             {
                 title: "Promoting Software",
                 image: "./promote.png",
-                description: "You can connect multiple social media apps (WhatsApp, Tinder, Telegram, Facebook, Gmail, Messenger, Line, Instagram, TikTok, Snapchat, etc. ) with unlimited accounts on the same app.",
+                description: "Connect multiple social media apps (WhatsApp, Telegram, Facebook, Instagram, TikTok, etc.) with unlimited accounts on the same app simultaneously.",
                 oldPrice: "$100",
                 newPrice: "$75",
-                discount: "33% OFF"
+                discount: "33% OFF",
+                views: 901
             }
-
-
         ];
 
+        // View and Like Counters
+        let currentViewers = 500; // Starting with minimum 500
+        let totalViews = 0;
+        let likes = 24;
+        let isLiked = false;
+
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'k';
+            }
+            return num.toString();
+        }
+
+        function updateViewCounters() {
+            // Simulate random viewer changes
+            const change = Math.floor(Math.random() * 21) - 10; // -10 to +10
+            currentViewers = Math.max(500, currentViewers + change);
+            
+            // Update all view counters
+            document.getElementById('headerViews').textContent = formatNumber(currentViewers);
+            document.getElementById('globalViews').textContent = formatNumber(currentViewers);
+            document.getElementById('footerViews').textContent = formatNumber(currentViewers);
+            
+            // Calculate total views
+            totalViews = services.reduce((sum, service) => sum + service.views, 0);
+            document.getElementById('totalViews').textContent = formatNumber(totalViews);
+            
+            // Update service card views
+            document.querySelectorAll('.views-count span').forEach((span, index) => {
+                if (index < services.length) {
+                    span.textContent = formatNumber(services[index].views);
+                }
+            });
+        }
+
+        function initializeViewSystem() {
+            // Initial update
+            updateViewCounters();
+            
+            // Update viewers every 3-7 seconds randomly
+            setInterval(updateViewCounters, 3000 + Math.random() * 4000);
+            
+            // Initialize like system
+            const likeBtn = document.getElementById('globalLikeBtn');
+            const likeCount = document.getElementById('globalLikes');
+            
+            likeCount.textContent = likes;
+            
+            likeBtn.addEventListener('click', function() {
+                if (!isLiked) {
+                    likes++;
+                    likeCount.textContent = likes;
+                    this.classList.add('liked');
+                    this.innerHTML = `<i class="fas fa-heart"></i> <span>${likes}</span>`;
+                    isLiked = true;
+                    
+                    // Add animation effect
+                    this.style.animation = 'pulseRed 0.5s';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                }
+            });
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
             const container = document.getElementById('servicesContainer');
 
+            // Load services
             services.forEach((service, index) => {
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.style.animationDelay = `${index * 0.1}s`;
                 card.innerHTML = `
                     <div class="service-image">
-                        <img src="${service.image}" alt="${service.title}">
+                        <img src="${service.image}" alt="${service.title}" loading="lazy">
                         <div class="service-badge">${service.discount}</div>
                     </div>
                     <div class="service-content">
@@ -976,9 +1221,16 @@
                                 <span style="color: #888; font-size: 0.9rem;">One-time payment</span>
                                 <span class="discount">${service.discount}</span>
                             </div>
-                            <div class="guarantee">
-                                <i class="fas fa-check-circle"></i>
-                                <span>30-Day Money Back Guarantee</span>
+                            
+                            <div class="view-stats">
+                                <div class="views-count">
+                                    <i class="fas fa-eye"></i>
+                                    <span>${formatNumber(service.views)}</span> views
+                                </div>
+                                <div class="like-counter service-like-btn">
+                                    <i class="far fa-heart"></i>
+                                    <span>${Math.floor(service.views / 20)}</span>
+                                </div>
                             </div>
                         </div>
                         
@@ -989,6 +1241,9 @@
                 `;
                 container.appendChild(card);
             });
+
+            // Initialize view system
+            initializeViewSystem();
 
             // Animate cards on scroll
             const animateCards = () => {
@@ -1018,8 +1273,15 @@
                     }, 1500);
 
                     // Open Telegram with pre-filled message
-                    const message = `Hello! I'm interested in the ${service} service. Can you provide more details?`;
+                    const message = `Hello! I'm interested in the "${service}" service. Can you provide more details and pricing?`;
                     window.open(`https://t.me/realcapoo?text=${encodeURIComponent(message)}`, '_blank');
+                    
+                    // Increase view count for this service
+                    const serviceIndex = services.findIndex(s => s.title === service);
+                    if (serviceIndex !== -1) {
+                        services[serviceIndex].views += 1;
+                        updateViewCounters();
+                    }
                 });
             });
 
@@ -1039,8 +1301,30 @@
                     }
                 });
             });
+
+            // Service like buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.service-like-btn')) {
+                    const btn = e.target.closest('.service-like-btn');
+                    const span = btn.querySelector('span');
+                    const icon = btn.querySelector('i');
+                    
+                    if (!btn.classList.contains('liked')) {
+                        let currentLikes = parseInt(span.textContent);
+                        currentLikes++;
+                        span.textContent = currentLikes;
+                        icon.className = 'fas fa-heart';
+                        btn.classList.add('liked');
+                        
+                        // Add animation
+                        btn.style.animation = 'pulseRed 0.5s';
+                        setTimeout(() => {
+                            btn.style.animation = '';
+                        }, 500);
+                    }
+                }
+            });
         });
     </script>
 </body>
-
 </html>
