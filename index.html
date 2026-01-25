@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Digital Solutions | Premium Services</title>
+    <title>Elite Digital Solutions | Professional Platform Development</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
@@ -28,6 +28,8 @@
             --green: #00ff88;
             --red: #ff3366;
             --yellow: #ffcc00;
+            --purple: #9d4edd;
+            --orange: #ff6b35;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -56,9 +58,9 @@
 
         /* Header */
         header {
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.98);
             backdrop-filter: blur(20px);
-            padding: 1.5rem 0;
+            padding: 1.2rem 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -81,7 +83,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--green));
+            background: linear-gradient(135deg, var(--accent), var(--purple));
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -92,72 +94,86 @@
         .logo-text {
             font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--white), var(--accent));
+            background: linear-gradient(135deg, var(--accent), var(--white));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            white-space: nowrap;
         }
 
-        .trust-badges {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: #aaa;
-        }
-
-        .trust-badge i {
-            color: var(--green);
-        }
-
-        nav a {
-            margin-left: 2rem;
+        /* Mobile Menu Toggle - FIXED */
+    .menu-toggle {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
             color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            position: relative;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 0;
             position: relative;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: var(--accent);
         }
 
-        /* Channel Link */
-        .channel-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--accent), #0088cc);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
             transition: var(--transition);
-            margin-left: 1rem;
         }
 
-        .channel-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        /* View Counter */
         .view-counter {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.05);
             padding: 8px 15px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
         .live-dot {
@@ -168,113 +184,233 @@
             animation: pulse 1.5s infinite;
         }
 
-        .like-counter {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 6px 12px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Nav Overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            z-index: 998;
         }
 
-        .like-counter:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-overlay.active {
+            display: block;
         }
 
-        .like-counter.liked {
-            color: var(--red);
-            background: rgba(255, 51, 102, 0.1);
-            border-color: var(--red);
-        }
-
-        /* Hero */
+        /* Hero Section */
         .hero {
-            padding: 12rem 0 6rem;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                var(--black);
+            padding: 13rem 0 5rem;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, var(--dark) 100%);
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
         .hero-content {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .hero h1 {
-            font-size: 3.8rem;
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+        }
+
+        .hero-badge.premium {
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: white;
+            border: none;
+        }
+
+        .hero-badge.premium i {
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--white), var(--accent));
+            line-height: 1.1;
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, 
+                #ffffff 0%, 
+                var(--accent) 25%, 
+                var(--purple) 50%, 
+                var(--orange) 75%, 
+                #ffffff 100%
+            );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.2;
+            background-size: 200% auto;
+            animation: shimmer 4s ease-in-out infinite;
         }
 
         .hero-subtitle {
             font-size: 1.3rem;
             color: #aaa;
-            margin-bottom: 3rem;
             max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        /* Hero Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
+        .hero-stat {
             text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
         }
 
-        .stat-number {
-            font-size: 2.5rem;
+        .hero-stat:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
+            display: block;
         }
 
-        .stat-label {
-            color: #888;
-            font-size: 0.9rem;
+        .hero-stat-label {
+            color: #aaa;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Services */
+        /* Hero CTA */
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--accent), #0066cc);
+            color: white;
+            padding: 1.3rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        .cta-badge {
+            position: absolute;
+            top: 9px;
+            right: 0px;
+            background: var(--red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            animation: bounce 2s infinite;
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1.3rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Services Section */
         .services {
             padding: 5rem 0;
+            background: var(--dark);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-title h2 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
@@ -288,13 +424,20 @@
             transform: translateX(-50%);
             width: 100px;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--green));
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+        }
+
+        .section-title p {
+            color: #888;
+            max-width: 600px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
         }
 
         .service-card {
@@ -320,7 +463,7 @@
         }
 
         .service-image {
-            height: 220px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -342,19 +485,19 @@
             right: 15px;
             background: linear-gradient(135deg, var(--red), #ff0066);
             color: white;
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 25px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
         }
 
         .service-content {
-            padding: 2rem;
+            padding: 1.8rem;
         }
 
         .service-content h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--white);
             display: flex;
@@ -369,13 +512,14 @@
         .service-description {
             color: #aaa;
             margin-bottom: 1.5rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .price-container {
             background: rgba(0, 0, 0, 0.5);
             padding: 1.2rem;
-            border-radius: 15px;
+            border-radius: 12px;
             margin: 1.5rem 0;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -388,15 +532,15 @@
         }
 
         .old-price {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #666;
             text-decoration: line-through;
         }
 
         .new-price {
-            font-size: 1.3rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--green));
+            background: linear-gradient(135deg, var(--accent), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -404,19 +548,10 @@
         .discount {
             background: linear-gradient(135deg, var(--red), #ff3366);
             color: white;
-            padding: 5px 12px;
+            padding: 5px 10px;
             border-radius: 15px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-        }
-
-        .view-stats {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .views-count {
@@ -424,7 +559,8 @@
             align-items: center;
             gap: 8px;
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-top: 1rem;
         }
 
         .views-count i {
@@ -437,16 +573,15 @@
             background: linear-gradient(135deg, var(--accent), #0088cc);
             color: white;
             text-align: center;
-            padding: 1.2rem;
-            border-radius: 12px;
+            padding: 1.1rem;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 700;
             transition: var(--transition);
             margin-top: 1.5rem;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
+            font-size: 0.95rem;
             position: relative;
             overflow: hidden;
         }
@@ -454,10 +589,6 @@
         .service-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
-        }
-
-        .service-button:active {
-            transform: translateY(-1px);
         }
 
         /* Trust Section */
@@ -470,13 +601,13 @@
 
         .trust-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
         }
 
         .trust-card {
             background: rgba(255, 255, 255, 0.02);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 15px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -489,15 +620,15 @@
         }
 
         .trust-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: rgba(0, 212, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--accent);
         }
 
@@ -508,21 +639,29 @@
 
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .testimonial-card {
             background: rgba(255, 255, 255, 0.02);
-            padding: 2rem;
+            padding: 1.8rem;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .testimonial-text {
             color: #aaa;
             font-style: italic;
             margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .testimonial-author {
@@ -532,31 +671,32 @@
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--green));
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: black;
+            font-size: 0.9rem;
         }
 
         /* Telegram Button */
         .telegram-button {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 25px;
+            right: 25px;
             background: linear-gradient(135deg, #0088cc, var(--accent));
             color: white;
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             text-decoration: none;
             box-shadow: 0 8px 25px rgba(0, 136, 204, 0.5);
             transition: var(--transition);
@@ -569,42 +709,23 @@
             box-shadow: 0 12px 30px rgba(0, 136, 204, 0.7);
         }
 
-        .telegram-label {
-            position: absolute;
-            right: 85px;
-            background: var(--black);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .telegram-button:hover .telegram-label {
-            opacity: 1;
-            right: 90px;
-        }
-
         /* Footer */
         footer {
             background: var(--black);
-            padding: 5rem 0 2rem;
+            padding: 4rem 0 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
             color: var(--white);
             position: relative;
             padding-bottom: 10px;
@@ -625,7 +746,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
         }
 
         .footer-links a {
@@ -634,7 +755,8 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
         }
 
         .footer-links a:hover {
@@ -644,220 +766,301 @@
 
         .copyright {
             text-align: center;
-            padding-top: 3rem;
+            padding-top: 2.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
             }
-
             70% {
-                box-shadow: 0 0 0 20px rgba(0, 212, 255, 0);
+                box-shadow: 0 0 0 15px rgba(0, 212, 255, 0);
             }
-
             100% {
                 box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
             }
         }
 
-        @keyframes pulseRed {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7);
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 51, 102, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 51, 102, 0);
-            }
         }
 
-        /* Global View Counter */
-        .global-view-counter {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            text-align: center;
-            min-width: 180px;
-            box-shadow: var(--shadow);
-        }
-
-        .global-views {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 5px;
-        }
-
-        .global-label {
-            font-size: 0.9rem;
-            color: #aaa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
+                position: relative;
+            }
+
+        
+            .menu-toggle {
+                display: flex; /* Only visible on mobile */
+            }
+
+            .nav-container {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 5rem 1.5rem 2rem;
+                display: flex;
                 flex-direction: column;
                 gap: 1rem;
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 999;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
             }
 
-            .trust-badges {
+            .nav-container.active {
+                left: 0;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: left;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                font-size: 1.1rem;
+                display: block;
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .view-counter {
+                width: 100%;
                 justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            nav {
-                display: flex;
-                gap: 1rem;
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            nav a {
-                margin: 0;
-            }
-
-            .channel-link {
-                margin: 0.5rem 0;
+                margin-top: 2rem;
+                padding: 12px 20px;
+                font-size: 0.9rem;
             }
 
             .hero {
-                padding: 10rem 0 4rem;
+                padding: 11rem 0 3rem;
             }
 
-            .hero h1 {
+            .hero-title {
                 font-size: 2.8rem;
             }
 
-            .stats {
-                gap: 2rem;
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .hero-stat {
+                padding: 1.2rem;
+            }
+
+            .hero-stat-number {
+                font-size: 1.8rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .cta-primary, .cta-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                padding: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .service-card {
+                max-width: 400px;
+                margin: 0 auto;
             }
 
             .telegram-button {
                 bottom: 20px;
                 right: 20px;
-                width: 65px;
-                height: 65px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
             }
 
-            .telegram-label {
-                display: none;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                width: 250px;
+            }
+            
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
             }
 
-            .global-view-counter {
-                position: static;
-                margin: 2rem auto;
-                max-width: 300px;
+            .hero-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-badge {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .service-content {
+                padding: 1.5rem;
+            }
+
+            .service-image {
+                height: 180px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Global View Counter -->
-    <div class="global-view-counter">
-        <div class="global-views" id="globalViews">0</div>
-        <div class="global-label">
-            <span class="live-dot"></span>
-            <span>LIVE VIEWERS</span>
-        </div>
-        <div class="like-counter" id="globalLikeBtn" style="margin-top: 10px;">
-            <i class="far fa-heart"></i>
-            <span id="globalLikes">0</span>
-        </div>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="container header-content">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-cube"></i>
                 </div>
                 <div class="logo-text">EliteDigital</div>
             </div>
 
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Trusted by 500+ Clients</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-clock"></i>
-                    <span>24/16 Support</span>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="nav-container" id="navContainer">
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#trust">Why Us</a>
+                    <a href="#contact">Contact</a>
                 </div>
                 <div class="view-counter">
                     <span class="live-dot"></span>
-                    <span id="headerViews">0</span> viewing now
+                    <span id="currentViewers">247</span> viewing now
                 </div>
             </div>
-
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Premium Digital Solutions For Your Success</h1>
-            <p class="hero-subtitle">Professional services with guaranteed results. Join 2,500+ satisfied clients
-                worldwide.</p>
-
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2,500+</div>
-                    <div class="stat-label">Happy Clients</div>
+            <div class="hero-badges">
+                <div class="hero-badge premium">
+                    <i class="fas fa-crown"></i>
+                    <span>PREMIUM SERVICES</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Satisfaction Rate</div>
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>100% SECURE</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">24/16</div>
-                    <div class="stat-label">Support Available</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Active Services</div>
+                <div class="hero-badge">
+                    <i class="fas fa-headset"></i>
+                    <span>24/16 SUPPORT</span>
                 </div>
             </div>
 
-            <a href="#services" class="service-button" style="max-width: 300px; margin: 0 auto;">
-                <i class="fas fa-bolt"></i> View Premium Services
-            </a>
+            <h1 class="hero-title">
+                We Create <span class="title-gradient">High-Quality Platforms</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Professional platform solutions trusted by businesses worldwide. 
+                Guaranteed results, premium quality, and expert support.
+            </p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">2,500+</span>
+                    <div class="hero-stat-label">Happy Clients</div>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">98%</span>
+                    <div class="hero-stat-label">Success Rate</div>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">150+</span>
+                    <div class="hero-stat-label">Platforms Built</div>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">24/7</span>
+                    <div class="hero-stat-label">Active Support</div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="hero-cta">
+                <a href="#services" class="cta-primary">
+                    <i class="fas fa-code"></i> View All Services
+                    <span class="cta-badge">LIMITED</span>
+                </a>
+                <a href="https://t.me/realcapoo" target="_blank" class="cta-secondary">
+                    <i class="fab fa-telegram"></i> Contact Expert
+                </a>
+            </div>
         </div>
     </section>
 
@@ -865,13 +1068,12 @@
     <section class="services" id="services">
         <div class="container">
             <div class="section-title">
-                <h2>Premium Services</h2>
-                <p style="color: #888; max-width: 600px; margin: 1rem auto;">Limited time offers with exclusive
-                    discounts - <span id="totalViews">0</span> views this week</p>
+                <h2>Our Services</h2>
+                <p>We offer a backend and one year of hosting, as well as free updates for all platforms. </p>
             </div>
 
             <div class="services-grid" id="servicesContainer">
-                <!-- Services will be loaded here -->
+                <!-- Services will be loaded here by JavaScript -->
             </div>
         </div>
     </section>
@@ -880,39 +1082,38 @@
     <section class="trust-section" id="trust">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose Us</h2>
-                <p style="color: #888; max-width: 700px; margin: 1rem auto;">We deliver excellence with every service
-                </p>
+                <h2>Why Choose EliteDigital</h2>
+                <p>Professional platform development with guaranteed results</p>
             </div>
 
             <div class="trust-grid">
                 <div class="trust-card">
                     <div class="trust-icon">
-                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-code"></i>
                     </div>
-                    <h3>100% Secure</h3>
-                    <p style="color: #aaa;">Encrypted transactions and secure data handling</p>
+                    <h3>Clean Code</h3>
+                    <p style="color: #aaa;">Optimized, maintainable code that performs flawlessly at scale.</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>24/16 Support</h3>
-                    <p style="color: #aaa;">Round-the-clock customer support via Telegram</p>
-                </div>
-                <div class="trust-card">
-                    <div class="trust-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Quality Guarantee</h3>
-                    <p style="color: #aaa;">Premium quality services with guaranteed results</p>
+                    <h3>Bank-Level Security</h3>
+                    <p style="color: #aaa;">Advanced security protocols to protect your data and transactions.</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Fast Delivery</h3>
-                    <p style="color: #aaa;">Quick turnaround times for all services</p>
+                    <p style="color: #aaa;">Quick turnaround times without compromising on quality.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/16 Support</h3>
+                    <p style="color: #aaa;">Round-the-clock expert support via Telegram.</p>
                 </div>
             </div>
         </div>
@@ -922,47 +1123,46 @@
     <section class="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Client Testimonials</h2>
-                <p style="color: #888; max-width: 700px; margin: 1rem auto;">See what our clients say about our services
-                </p>
+                <h2>Client Success Stories</h2>
+                <p>See how businesses succeed with our custom platforms</p>
             </div>
 
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "The Delivery Platform service transformed my logistics business. Professional and reliable!"
+                        "Their delivery platform completely transformed our logistics operations. Real-time tracking and optimization features increased our efficiency by 40%."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">MJ</div>
                         <div>
                             <div style="font-weight: 600;">Michael Jordan</div>
-                            <div style="color: #888; font-size: 0.9rem;">Logistics Owner</div>
+                            <div style="color: #888; font-size: 0.9rem;">Logistics Company CEO</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "Excellent Payment Platform integration. Fast delivery and great support team!"
+                        "The payment platform integration was seamless and secure. Our transaction volume increased by 300% after implementation."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">SR</div>
                         <div>
                             <div style="font-weight: 600;">Sarah Roberts</div>
-                            <div style="color: #888; font-size: 0.9rem;">E-commerce Business</div>
+                            <div style="color: #888; font-size: 0.9rem;">E-commerce Founder</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "The Gaming Platform exceeded my expectations. Highly recommended for game developers!"
+                        "As a game studio, their platform provided everything we needed. The multiplayer system and leaderboards boosted user engagement significantly."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">DT</div>
                         <div>
                             <div style="font-weight: 600;">David Thompson</div>
-                            <div style="color: #888; font-size: 0.9rem;">Game Developer</div>
+                            <div style="color: #888; font-size: 0.9rem;">Game Studio Director</div>
                         </div>
                     </div>
                 </div>
@@ -973,7 +1173,6 @@
     <!-- Telegram Button -->
     <a href="https://t.me/realcapoo" class="telegram-button" target="_blank" title="Contact Support">
         <i class="fab fa-telegram-plane"></i>
-        <div class="telegram-label">24/16 Customer Support</div>
     </a>
 
     <!-- Footer -->
@@ -982,18 +1181,13 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>EliteDigital</h3>
-                    <p style="color: #aaa; margin-top: 1rem; line-height: 1.7;">
-                        Premium digital solutions provider since 2018. Trusted by businesses worldwide for quality and
-                        reliability.
+                    <p style="color: #aaa; margin-top: 1rem; line-height: 1.6; font-size: 0.95rem;">
+                        Professional platform development since 2018. We build custom solutions that help businesses scale, optimize operations, and drive growth.
                     </p>
-                    <div style="display: flex; gap: 15px; margin-top: 1.5rem;">
-                        <div
-                            style="color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-check-circle"></i> Verified Services
-                        </div>
-                        <div class="view-counter">
+                    <div style="margin-top: 1.5rem;">
+                        <div class="view-counter" style="justify-content: flex-start;">
                             <span class="live-dot"></span>
-                            <span id="footerViews">0</span> online
+                            <span id="footerViews">247</span> online now
                         </div>
                     </div>
                 </div>
@@ -1011,18 +1205,17 @@
                 <div class="footer-column">
                     <h3>Contact Support</h3>
                     <ul class="footer-links">
-                        <li><a href="https://t.me/realcapoo" target="_blank"><i class="fab fa-telegram"></i> Telegram:
-                                @realcapoo</a></li>
+                        <li><a href="https://t.me/realcapoo" target="_blank"><i class="fab fa-telegram"></i> Telegram: @realcapoo</a></li>
                         <li><a href="https://t.me/+5P030RRQH0UzNDk0" target="_blank"><i class="fab fa-telegram"></i> Official Channel</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> 24/16 Support Available</a></li>
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> Secure Transactions</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/16 Support</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Secure Platform</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="copyright">
-                <p>&copy; 2026 EliteDigital. All rights reserved. | Premium Digital Solutions Provider</p>
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #555;">2,500+ satisfied clients worldwide</p>
+                <p>&copy; 2026 EliteDigital Solutions. All rights reserved. | Professional Platform Development</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #555;">Trusted by 2,500+ clients worldwide</p>
             </div>
         </div>
     </footer>
@@ -1032,7 +1225,7 @@
             {
                 title: "Delivery Platform",
                 image: "./delivery.png",
-                description: "Complete delivery management system with real-time tracking, driver management, route optimization, and customer notifications. Perfect for logistics companies.",
+                description: "Complete delivery Platform system with tracking, including one year of hosting and free updates.  ",
                 oldPrice: "$2500",
                 newPrice: "$1500",
                 discount: "40% OFF",
@@ -1041,7 +1234,7 @@
             {
                 title: "Payment Platform",
                 image: "./payment.png",
-                description: "Secure payment processing system with multiple gateway integration, fraud detection, and real-time analytics. Supports all major payment methods.",
+                description: "We will set up a fake payment process for you using Visa, Mastercard, PayPal and so on. ",
                 oldPrice: "$1200",
                 newPrice: "$800",
                 discount: "33% OFF",
@@ -1050,34 +1243,34 @@
             {
                 title: "Gaming Platform",
                 image: "./gambling.png",
-                description: "Complete gaming platform with multiplayer support, leaderboards, achievements, and in-app purchases. Perfect for game developers and publishers.",
+                description: "We create any Kind of Gaming Platform ",
                 oldPrice: "$2500",
                 newPrice: "$1500",
                 discount: "40% OFF",
                 views: 598
             },
             {
-                title: "Fake Video Call with AI",
+                title: "Change Face AI Software ",
                 image: "./swap.jpg",
-                description: "Advanced AI-powered video call manipulation software. Change your face in real-time during video calls with our professional tools and software.",
+                description: "Advanced, AI software for changing face during calls on WhatsApp, Telegram, Line, etc.",
                 oldPrice: "$120",
                 newPrice: "$50",
                 discount: "50% OFF",
                 views: 892
             },
             {
-                title: "Advertising",
+                title: "Advertising ",
                 image: "./ads.png",
-                description: "Complete advertising strategy and campaign management. Learn advanced techniques to attract clients from competitors with proven methods.",
+                description: "We will teach you how to run ads on all platforms, such as Facebook and TikTok, and how to steal clients",
                 oldPrice: "$199",
                 newPrice: "$90",
                 discount: "25% OFF",
                 views: 456
             },
             {
-                title: "Data Generators",
+                title: "Data Generator",
                 image: "./data.png",
-                description: "Professional software for generating data (WhatsApp numbers, emails) from any country. Extract group members from Telegram and WhatsApp automatically.",
+                description: "Software for generating WhatsApp numbers and email addresses for clients from any country in the world. ",
                 oldPrice: "$829",
                 newPrice: "$400",
                 discount: "52% OFF",
@@ -1086,43 +1279,43 @@
             {
                 title: "Trading Platform",
                 image: "./trading.jpg",
-                description: "Advanced trading platform with real-time analytics, secure transactions, comprehensive market insights, and automated trading capabilities.",
+                description: "We will create a full trading platform for you , including one year of hosting and free updates. ",
                 oldPrice: "$2999",
                 newPrice: "$1999",
                 discount: "33% OFF",
                 views: 512
             },
             {
-                title: "Optimisation Platform",
+                title: "Optimization Platform",
                 image: "./grap.jpg",
-                description: "Custom optimization platforms and graph order systems. We design any kind of optimization platform or graph system you need for your business.",
+                description: "We will create an optimisation platform for you, including one year of hosting and free updates.",
                 oldPrice: "$2490",
-                newPrice: "$1000",
+                newPrice: "$1200",
                 discount: "56% OFF",
                 views: 423
             },
             {
                 title: "E-commerce Platform",
                 image: "./ecommerce.png",
-                description: "Complete e-commerce platform with payment integration, inventory management, customer dashboard, and advanced analytics.",
+                description: "Complete e-commerce platform like lazada store , including one year of hosting and free updates. ",
                 oldPrice: "$2600",
                 newPrice: "$1600",
                 discount: "38% OFF",
                 views: 634
             },
             {
-                title: "Receipt Editing",
+                title: "Receipt Software",
                 image: "./print.jpg",
-                description: "Advanced software for editing digital receipts and invoices. Supports multiple formats including crypto and bank statements with screenshot capabilities.",
+                description: "We sell and create receipt software with the option to take a screenshot and edit the time, date, sender and receiver. ...  ",
                 oldPrice: "$300",
                 newPrice: "$200",
                 discount: "33% OFF",
                 views: 789
             },
             {
-                title: "Promoting Software",
+                title: "All-In-One Software",
                 image: "./promote.png",
-                description: "Connect multiple social media apps (WhatsApp, Telegram, Facebook, Instagram, TikTok, etc.) with unlimited accounts on the same app simultaneously.",
+                description: "Social media management platform connecting multiple apps with unlimited account management.",
                 oldPrice: "$100",
                 newPrice: "$75",
                 discount: "33% OFF",
@@ -1130,11 +1323,7 @@
             }
         ];
 
-        // View and Like Counters
-        let currentViewers = 500; // Starting with minimum 500
-        let totalViews = 0;
-        let likes = 24;
-        let isLiked = false;
+        let currentViewers = 247; // Starting viewers
 
         function formatNumber(num) {
             if (num >= 1000) {
@@ -1143,62 +1332,19 @@
             return num.toString();
         }
 
-        function updateViewCounters() {
-            // Simulate random viewer changes
+        function updateLiveViewers() {
+            // Simulate viewer changes
             const change = Math.floor(Math.random() * 21) - 10; // -10 to +10
-            currentViewers = Math.max(500, currentViewers + change);
+            currentViewers = Math.max(150, currentViewers + change);
             
-            // Update all view counters
-            document.getElementById('headerViews').textContent = formatNumber(currentViewers);
-            document.getElementById('globalViews').textContent = formatNumber(currentViewers);
-            document.getElementById('footerViews').textContent = formatNumber(currentViewers);
-            
-            // Calculate total views
-            totalViews = services.reduce((sum, service) => sum + service.views, 0);
-            document.getElementById('totalViews').textContent = formatNumber(totalViews);
-            
-            // Update service card views
-            document.querySelectorAll('.views-count span').forEach((span, index) => {
-                if (index < services.length) {
-                    span.textContent = formatNumber(services[index].views);
-                }
-            });
+            // Update viewer counters
+            document.getElementById('currentViewers').textContent = currentViewers;
+            document.getElementById('footerViews').textContent = currentViewers;
         }
 
-        function initializeViewSystem() {
-            // Initial update
-            updateViewCounters();
-            
-            // Update viewers every 3-7 seconds randomly
-            setInterval(updateViewCounters, 3000 + Math.random() * 4000);
-            
-            // Initialize like system
-            const likeBtn = document.getElementById('globalLikeBtn');
-            const likeCount = document.getElementById('globalLikes');
-            
-            likeCount.textContent = likes;
-            
-            likeBtn.addEventListener('click', function() {
-                if (!isLiked) {
-                    likes++;
-                    likeCount.textContent = likes;
-                    this.classList.add('liked');
-                    this.innerHTML = `<i class="fas fa-heart"></i> <span>${likes}</span>`;
-                    isLiked = true;
-                    
-                    // Add animation effect
-                    this.style.animation = 'pulseRed 0.5s';
-                    setTimeout(() => {
-                        this.style.animation = '';
-                    }, 500);
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
+        function loadServices() {
             const container = document.getElementById('servicesContainer');
-
-            // Load services
+            
             services.forEach((service, index) => {
                 const card = document.createElement('div');
                 card.className = 'service-card';
@@ -1209,31 +1355,96 @@
                         <div class="service-badge">${service.discount}</div>
                     </div>
                     <div class="service-content">
-                        <h3><i class="fas fa-star"></i> ${service.title}</h3>
+                        <h3><i class="fas fa-cube"></i> ${service.title}</h3>
                         <p class="service-description">${service.description}</p>
                         
                         <div class="price-container">
                             <div class="price-row">
-                                  <div class="views-count">
+                                <span class="old-price">${service.oldPrice}</span>
+                                <span class="new-price">${service.newPrice}</span>
+                            </div>
+                            <div class="price-row">
+                                <span class="discount">${service.discount}</span>
+                                <div class="views-count">
                                     <i class="fas fa-eye"></i>
                                     <span>${formatNumber(service.views)}</span> views
                                 </div>
-                                <span class="new-price">${service.newPrice}</span>
                             </div>
-                            
-                           
                         </div>
                         
                         <button class="service-button" data-service="${service.title}">
-                            <i class="fab fa-telegram"></i> Get This Service Now
+                            <i class="fab fa-telegram"></i> Get This Platform
                         </button>
                     </div>
                 `;
                 container.appendChild(card);
             });
+        }
 
-            // Initialize view system
-            initializeViewSystem();
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize live viewers
+            updateLiveViewers();
+            setInterval(updateLiveViewers, 5000);
+
+            // Load services
+            loadServices();
+
+            // Create overlay element for mobile menu
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navContainer = document.getElementById('navContainer');
+
+            function toggleMenu() {
+                const isActive = navContainer.classList.toggle('active');
+                overlay.classList.toggle('active', isActive);
+                
+                // Update icon
+                menuToggle.innerHTML = isActive 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+                
+                // Prevent body scroll when menu is open
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            }
+
+            // Toggle menu on button click
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event bubbling
+                toggleMenu();
+            });
+
+            // Close menu when clicking overlay
+            overlay.addEventListener('click', function() {
+                toggleMenu();
+            });
+
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    toggleMenu();
+                });
+            });
+
+            // Close menu when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768 && 
+                    !navContainer.contains(e.target) && 
+                    !menuToggle.contains(e.target) && 
+                    navContainer.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navContainer.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
 
             // Animate cards on scroll
             const animateCards = () => {
@@ -1250,11 +1461,11 @@
             animateCards();
 
             // Service button click
-            document.querySelectorAll('.service-button').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const service = this.getAttribute('data-service');
-                    const telegramLink = 'https://t.me/realcapoo';
-
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('.service-button')) {
+                    const button = e.target.closest('.service-button');
+                    const service = button.getAttribute('data-service');
+                    
                     // Highlight telegram button
                     const telegramBtn = document.querySelector('.telegram-button');
                     telegramBtn.style.animation = 'pulse 0.5s 3';
@@ -1262,57 +1473,32 @@
                         telegramBtn.style.animation = 'pulse 2s infinite';
                     }, 1500);
 
-                    // Open Telegram with pre-filled message
-                    const message = `Hello! I'm interested in the "${service}" service. Can you provide more details and pricing?`;
+                    const message = `Hello! I'm interested in your "${service}" platform. Can you provide more details?`;
                     window.open(`https://t.me/realcapoo?text=${encodeURIComponent(message)}`, '_blank');
-                    
-                    // Increase view count for this service
-                    const serviceIndex = services.findIndex(s => s.title === service);
-                    if (serviceIndex !== -1) {
-                        services[serviceIndex].views += 1;
-                        updateViewCounters();
-                    }
-                });
+                }
             });
 
             // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
 
                     const target = document.querySelector(targetId);
                     if (target) {
+                        e.preventDefault();
+                        
+                        // Close mobile menu if open
+                        if (navContainer.classList.contains('active')) {
+                            toggleMenu();
+                        }
+                        
                         window.scrollTo({
                             top: target.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
                 });
-            });
-
-            // Service like buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.service-like-btn')) {
-                    const btn = e.target.closest('.service-like-btn');
-                    const span = btn.querySelector('span');
-                    const icon = btn.querySelector('i');
-                    
-                    if (!btn.classList.contains('liked')) {
-                        let currentLikes = parseInt(span.textContent);
-                        currentLikes++;
-                        span.textContent = currentLikes;
-                        icon.className = 'fas fa-heart';
-                        btn.classList.add('liked');
-                        
-                        // Add animation
-                        btn.style.animation = 'pulseRed 0.5s';
-                        setTimeout(() => {
-                            btn.style.animation = '';
-                        }, 500);
-                    }
-                }
             });
         });
     </script>
