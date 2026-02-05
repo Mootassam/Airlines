@@ -101,7 +101,7 @@
         }
 
         /* Mobile Menu Toggle - FIXED */
-    .menu-toggle {
+        .menu-toggle {
             display: none; /* Hidden by default */
             background: none;
             border: none;
@@ -201,9 +201,9 @@
             display: block;
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED */
         .hero {
-            padding: 13rem 0 5rem;
+            padding: 8rem 0 5rem;
             background: 
                 radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
@@ -211,60 +211,23 @@
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .hero-badge:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .hero-badge i {
-            color: var(--accent);
-        }
-
-        .hero-badge.premium {
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            color: white;
-            border: none;
-        }
-
-        .hero-badge.premium i {
-            color: white;
+            width: 100%;
         }
 
         .hero-title {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
             line-height: 1.1;
         }
 
@@ -283,54 +246,88 @@
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #aaa;
             max-width: 700px;
             margin: 0 auto 3rem;
             line-height: 1.6;
         }
 
-        /* Hero Stats */
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+        /* What's Included Section - UPDATED */
+        .included-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .hero-stat {
+        .included-title {
+            font-size: 1.8rem;
             text-align: center;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .hero-stat:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .hero-stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
+            margin-bottom: 2rem;
             background: linear-gradient(135deg, var(--accent), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
-        .hero-stat-label {
-            color: #aaa;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .included-title i {
+            font-size: 1.5rem;
+        }
+
+        .included-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .included-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            justify-content: left;
+        }
+
+        .included-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .included-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--green), #00cc66);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: black;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .included-text {
+            text-align: left;
+        }
+
+        .included-text h4 {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin: 0;
         }
 
         /* Hero CTA */
@@ -798,7 +795,7 @@
 
         /* Mobile Responsive */
         @media (max-width: 1024px) {
-            .hero-stats {
+            .included-features {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -808,7 +805,6 @@
                 position: relative;
             }
 
-        
             .menu-toggle {
                 display: flex; /* Only visible on mobile */
             }
@@ -863,11 +859,13 @@
             }
 
             .hero {
-                padding: 11rem 0 3rem;
+                padding: 10rem 0 3rem;
+                min-height: auto;
+                display: block;
             }
 
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
 
             .hero-subtitle {
@@ -875,18 +873,17 @@
                 padding: 0 1rem;
             }
 
-            .hero-stats {
+            .included-section {
+                padding: 1.5rem;
+                margin: 2rem 1rem;
+            }
+
+            .included-title {
+                font-size: 1.5rem;
+            }
+
+            .included-features {
                 grid-template-columns: 1fr;
-                gap: 1rem;
-                padding: 0 1rem;
-            }
-
-            .hero-stat {
-                padding: 1.2rem;
-            }
-
-            .hero-stat-number {
-                font-size: 1.8rem;
             }
 
             .hero-cta {
@@ -946,18 +943,7 @@
             }
             
             .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-badges {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-badge {
-                width: 100%;
-                max-width: 250px;
-                justify-content: center;
+                font-size: 2rem;
             }
 
             .section-title h2 {
@@ -970,6 +956,14 @@
 
             .service-image {
                 height: 180px;
+            }
+
+            .included-item {
+                padding: 0.8rem;
+            }
+
+            .included-text h4 {
+                font-size: 1rem;
             }
         }
     </style>
@@ -1008,21 +1002,6 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <div class="hero-badges">
-                <div class="hero-badge premium">
-                    <i class="fas fa-crown"></i>
-                    <span>PREMIUM SERVICES</span>
-                </div>
-                <div class="hero-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>100% SECURE</span>
-                </div>
-                <div class="hero-badge">
-                    <i class="fas fa-headset"></i>
-                    <span>24/16 SUPPORT</span>
-                </div>
-            </div>
-
             <h1 class="hero-title">
                 We Create <span class="title-gradient">High-Quality Platforms</span>
             </h1>
@@ -1032,22 +1011,38 @@
                 Guaranteed results, premium quality, and expert support.
             </p>
 
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-number">2,500+</span>
-                    <div class="hero-stat-label">Happy Clients</div>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">98%</span>
-                    <div class="hero-stat-label">Success Rate</div>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">150+</span>
-                    <div class="hero-stat-label">Platforms Built</div>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-number">24/7</span>
-                    <div class="hero-stat-label">Active Support</div>
+            <!-- What's Included Section -->
+            <div class="included-section">
+                <h2 class="included-title">
+                    <i class="fas fa-gem"></i>
+                    ✨What is included✨
+                </h2>
+                
+                <div class="included-features">
+                    <div class="included-item">
+                        <div class="included-icon">✅</div>
+                        <div class="included-text">
+                            <h4>Back-end system</h4>
+                        </div>
+                    </div>
+                    <div class="included-item">
+                        <div class="included-icon">✅</div>
+                        <div class="included-text">
+                            <h4>1-year hosting</h4>
+                        </div>
+                    </div>
+                    <div class="included-item">
+                        <div class="included-icon">✅</div>
+                        <div class="included-text">
+                            <h4>WhatsApp Number Generator</h4>
+                        </div>
+                    </div>
+                    <div class="included-item">
+                        <div class="included-icon">✅</div>
+                        <div class="included-text">
+                            <h4>Free updates</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1069,7 +1064,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Services</h2>
-                <p>We offer a backend and one year of hosting, as well as free updates for all platforms. </p>
+                <p>Premium platform development with complete backend, hosting, and free updates included</p>
             </div>
 
             <div class="services-grid" id="servicesContainer">
@@ -1221,6 +1216,68 @@
     </footer>
 
     <script>
+    // === CONFIGURATION ===
+    const BOT_TOKEN = '8399704040:AAHe4MEa_B02S-L-j60NgaXiUO2cDG9BsUs'; // Your BotFather token
+    const YOUR_CHAT_ID = '7260961031'; // ⚠️ Replace with your actual Chat ID
+    const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+    // Function to send a Telegram message[citation:9]
+    function sendTelegramNotification(message) {
+        fetch(TELEGRAM_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: YOUR_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML' // Optional: for basic formatting
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log('Notification sent:', data))
+        .catch(error => console.error('Error sending notification:', error));
+    }
+
+    // Function to request location (requires visitor consent)
+    function requestAndSendLocation() {
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+                const locationMessage = `📍 Visitor Location:\nLatitude: ${lat}\nLongitude: ${lon}\n<a href="${mapsLink}">View on Google Maps</a>`;
+                sendTelegramNotification(locationMessage);
+            },
+            (error) => {
+                // Handle errors or denials
+                console.log("Location request failed or was denied.");
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    }
+
+    // === ON PAGE LOAD ===
+    (function() {
+        // Send basic visit notification
+        const visitorData = `
+🟢 New Website Visitor
+🕐 Time: ${new Date().toLocaleString()}
+🌐 Page: ${window.location.href}
+🔍 Referrer: ${document.referrer || 'Direct'}
+🖥️ User Agent: ${navigator.userAgent}
+        `;
+        sendTelegramNotification(visitorData);
+
+        // Optional: Uncomment the line below to REQUEST location consent on page load
+        // requestAndSendLocation();
+    })();
+</script>
+
+    <script>
         const services = [
             {
                 title: "Delivery Platform",
@@ -1244,8 +1301,8 @@
                 title: "Gaming Platform",
                 image: "./gambling.png",
                 description: "We create any Kind of Gaming Platform ",
-                oldPrice: "$2500",
-                newPrice: "$1500",
+                oldPrice: "$3500",
+                newPrice: "$2500",
                 discount: "40% OFF",
                 views: 598
             },
